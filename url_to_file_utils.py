@@ -5,17 +5,16 @@ from urllib.parse import unquote
 import requests
 
 
-def file_download(filename, url):
-	directory = os.path.dirname(filename)
-	if not os.path.exists(directory):
-		os.makedirs(directory)
+def download_file(filepath, url):
+	directory = os.path.dirname(filepath)
+	os.makedirs(directory, exist_ok = True)
 	response = requests.get(url)
 	response.raise_for_status()
-	with open(filename, 'wb') as file:
+	with open(filepath, 'wb') as file:
 		file.write(response.content)
 
 
-def file_ext_from_url(url):
+def get_file_extension(url):
 	url_parsed = urlsplit (url)
 	path_unquoted = unquote(url_parsed.path)
 	file_extension = os.path.split(path_unquoted)[1]
