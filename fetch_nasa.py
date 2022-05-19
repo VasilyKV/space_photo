@@ -18,8 +18,10 @@ def fetch_nasa_apod(api_key, photos_amount, folder):
 	nasa_apods = response.json()
 	for count, nasa_apod in enumerate(nasa_apods, start=1):
 		photo_url = nasa_apod.get('url')
-		file_path = f'{folder}nasa_apod{count}{get_file_extension(photo_url)}'
-		download_file(file_path, photo_url)
+		file_extension = get_file_extension(photo_url)
+		if file_extension:
+			file_path = f'{folder}nasa_apod{count}{file_extension}'
+			download_file(file_path, photo_url)
 
 
 def fetch_nasa_epic(api_key, photos_amount, folder):
