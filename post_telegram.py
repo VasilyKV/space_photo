@@ -1,4 +1,3 @@
-import shutil
 import os
 import telegram
 import time
@@ -19,8 +18,8 @@ def main():
 			photo_path = f'{photo_folder}{photo_name}'
 			with open(photo_path, 'rb') as photo:
 				bot.send_photo(chat_id=chat_id, photo=photo)
+			os.remove(photo_path)
 			time.sleep(execution_period)
-		shutil.rmtree(photo_folder, ignore_errors=True)
 
 
 if __name__ == '__main__':
