@@ -1,3 +1,4 @@
+import shutil
 import os
 import telegram
 import time
@@ -15,9 +16,11 @@ def main():
 	while True:
 		photos_list = os.listdir(path=photo_folder)
 		for photo_name in photos_list:
-			with open(f'{photo_folder}{photo_name}', 'rb') as photo:
+			photo_path = f'{photo_folder}{photo_name}'
+			with open(photo_path, 'rb') as photo:
 				bot.send_photo(chat_id=chat_id, photo=photo)
-		time.sleep(execution_period)
+			time.sleep(execution_period)
+		shutil.rmtree(photo_folder, ignore_errors=True)
 
 
 if __name__ == '__main__':
