@@ -1,6 +1,5 @@
 import os
-from urllib.parse import urlsplit
-from urllib.parse import unquote
+from urllib.parse import urlsplit, unquote
 
 import requests
 
@@ -17,7 +16,6 @@ def download_file(filepath, url):
 def get_file_extension(url):
 	url_parsed = urlsplit (url)
 	path_unquoted = unquote(url_parsed.path)
-	file_extension = os.path.split(path_unquoted)[1]
-	file_extension = os.path.splitext(file_extension)[1]
+	file_extension = os.path.splitext(path_unquoted)[1]
 	return file_extension
 	
